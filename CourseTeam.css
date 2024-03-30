@@ -1,0 +1,93 @@
+body {
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x:hidden;
+}
+
+article{
+    flex:1;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    justify-content: flex-start, space-evenly;
+    background-color: aliceblue;
+    border-bottom:2px solid black;
+    width:100%;
+}
+
+
+.navbar a {
+    display: flex;
+    flex:1;
+    text-decoration: none;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color:#5C7BAD;
+    font-size: large;
+}
+
+.navbar a:hover {
+    background-color: #0F1E53;
+    color:white;
+}
+
+.navbar img {
+    width: auto;
+    height:70px;
+    padding-left: 20px;
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    padding: 70px;
+}
+
+#title {
+    display:flex;
+    justify-content: center;
+}
+
+.instructors {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.instructor-info{
+    border:2px solid black;
+    border-radius: 20px;
+    flex-basis: calc(50% - 20px);
+    text-align: center;
+    max-width: 36%;
+    margin: 0.1% 2% 2% 2%;
+    box-sizing: border-box; 
+    /* The box-sizing: border-box; property ensures that the border and padding of an element are 
+    included in its total width and height calculation. This means that if you set a width of, for example, 
+    50%, and add a 2px border, the overall width of the element will still be 50%, and the border will be 
+    included within that space.
+    
+    Without box-sizing: border-box;, the default box-sizing value is content-box, which calculates width 
+    and height only based on the element's content, excluding padding and border. This can lead to unexpected 
+    layout issues when you add padding or borders, as they will increase the overall size of the element.
+    */
+}
+
+
+.footer {
+    position:relative;
+    bottom:0;
+    width:100%;
+    background-color: aliceblue;
+    border-top:2px solid black;
+    height: 5%;
+    padding: 1%;
+    text-align: center;
+}
