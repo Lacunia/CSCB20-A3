@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="lecture.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lecture.css') }}">
     <title>Lecture</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
         <img src="{{ url_for('static', filename='logo.png') }}">
         <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
-        <a href="{{ url_for('calender') }}">Calender</a>
+        <a href="{{ url_for('calendar') }}">calendar</a>
         <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
         <a href="{{ url_for('assignment') }}">Assignment</a>
         <a href="{{ url_for('resources') }}">Resources</a>
