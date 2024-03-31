@@ -3,30 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="feedback.css">
-    <title>Feedback</title>
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
 </head>
 <body>
+    <!-- navbar -->
     <div class="navbar">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
-        <a href="{{ url_for('calender') }}">Calender</a>
-        <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
-        <a href="{{ url_for('assignment') }}">Assignment</a>
-        <a href="{{ url_for('resources') }}">Resources</a>
-        <a href="{{ url_for('feedback') }}">Feedback</a>
+        <img src="resources/logo.png">
     </div>
-    <!-- Content of the page -->
+    <!-- page content -->
     <article>
         <div class="Content">
-            <h1 id="title">Feedback form</h1>
-            <p>
-                Please leave your feedback for us. We appreciate any suggestions and will do our best
-                to improve the course!
-            </p>
+            <h1 id="title">Login</h1>
             <div class="feedback-form">
-                <form action="http://127.0.0.1:5000/feedback" method="post">
+                <form action="http://127.0.0.1:5000/login" method="post">
                     <label for="teaching">1. What do you like about the instructor teaching?</label> <br>
                     <textarea id="teaching" name="teaching"></textarea>
                     <br>
@@ -43,7 +33,7 @@
                     <textarea id="lab-improve" name="lab-improve"></textarea>
                     <br>
 
-                    <button type="submit" id="submit">Submit</button>
+                    <button type="submit" id="submit">Login</button>
                 </form>
             </div>
         </div>

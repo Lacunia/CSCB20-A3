@@ -1,69 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>CSCb20 Course Website</title>
-</head>
-<body>
-    <div class="navbar">
-        <img src="resources/logo.png">
-        <a href="index.html">Home</a>
-        <a href="CourseTeam.html">CourseTeam</a>
-        <a href="calendar.html">Calender</a>
-        <a href="lecture.html">Lecture/Lab</a>
-        <a href="assignment.html">Assignment</a>
-        <a href="resources.html">Resources</a>
-        <a href="feedback.html">Feedback</a>
-    </div>
-    
+{% extends "base.html" %}
 
-    <article>
-        <div class="content">
-            <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
-            <br>
-            <div class="row">
-                <div class="description" id="course-content">
-                    <h2>Course Description</h2>
-                    <p id="introP"> 
-                        Welcome to CSCB20 course. In this course, you will learn about databases and web applications. A practical introduction to databases and Web app development. Databases: terminology and applications; creating, 
-                        querying and updating databases; the entity-relationship model for database design. Web documents and applications: 
-                        static and interactive documents; Web servers and dynamic server-generated content; Web application development and 
-                        interface with databases.
-                    </p>
-                    <h4>Prerequisite:</h4><p class="description-p">Some experience with programming in an imperative language such as Python, Java or C.</p>
-                    <h4>Exclusion:</h4><p class="description-p">This course cannot be taken after - or concurrently with - any C- or D-level CSC course.</p>
-                    <h4>Course Syllabus: <a href="resources/pdf.pdf" target="_blank">PDF</a></h3>
-                </div>
-                <div class="description" id="instructor-info">
-                    <h2>Instructor Information</h2>
-                    <h4>Dr. Purva R. Gawde</h4>
-                    <h4>Email:</h4><p class="description-p">purva.gawde@utoronto.ca</p>
-                    <h4>Office:</h4><p class="description-p">IC 484</p>
-                    <h4>Phone Number:</h3><p class="description-p">123-456-7890</p>
-                    <h4>Lectures:</h4><p class="description-p">Mondays: 9:00 - 11:00 in SW319</p>
-                    <h4>Office Hours:</h4><p class="description-p">Tuesday: 12:00 - 13:00 in IC484</p><br>
-                    <p class="mini-words"><em>Note:</em> Lectures will not be recorded.</p>
-                </div>
-            </div>
-            <div class="description" id="announcement">
-                <h2 class="table-header">Announcement</h2>
-                <div class="table">
-                    <p class="date">Jan. 2</p>
-                    <p class="announcement">Welcome to CSCB20! Please note the tutorials will begin in week 2.</p>
-                    <p class="date">Jan. 5</p>
-                    <p class="announcement">All FAQ about this course, such as midterm information or assignment questions can be posted and will be answered through Piazza, under the 'Resources' tab.</p>
-                </div>
-            </div>
+{% block title %}Home{% endblock %}
+
+{% block additional_css %}
+    <!-- Link to child-specific CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
+    <br>
+    <div class="row">
+        <div class="description" id="course-content">
+            <h2>Course Description</h2>
+            <p id="introP"> 
+                Welcome to CSCB20 course. In this course, you will learn about databases and web applications. A practical introduction to databases and Web app development. Databases: terminology and applications; creating, 
+                querying and updating databases; the entity-relationship model for database design. Web documents and applications: 
+                static and interactive documents; Web servers and dynamic server-generated content; Web application development and 
+                interface with databases.
+            </p>
+            <h4>Prerequisite:</h4><p class="description-p">Some experience with programming in an imperative language such as Python, Java or C.</p>
+            <h4>Exclusion:</h4><p class="description-p">This course cannot be taken after - or concurrently with - any C- or D-level CSC course.</p>
+            <h4>Course Syllabus: <a href="resources/pdf.pdf" target="_blank">PDF</a></h3>
         </div>
-    </article>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>
-            <a href="https://web.cs.toronto.edu/">Faculty of Computer Science at University of Toronto</a>
-        </p>
+        <div class="description" id="instructor-info">
+            <h2>Instructor Information</h2>
+            <h4>Dr. Purva R. Gawde</h4>
+            <h4>Email:</h4><p class="description-p">purva.gawde@utoronto.ca</p>
+            <h4>Office:</h4><p class="description-p">IC 484</p>
+            <h4>Phone Number:</h3><p class="description-p">123-456-7890</p>
+            <h4>Lectures:</h4><p class="description-p">Mondays: 9:00 - 11:00 in SW319</p>
+            <h4>Office Hours:</h4><p class="description-p">Tuesday: 12:00 - 13:00 in IC484</p><br>
+            <p class="mini-words"><em>Note:</em> Lectures will not be recorded.</p>
+        </div>
     </div>
-</body>
-</html>
+    <div class="description" id="announcement">
+        <h2 class="table-header">Announcement</h2>
+        <div class="table">
+            <p class="date">Jan. 2</p>
+            <p class="announcement">Welcome to CSCB20! Please note the tutorials will begin in week 2.</p>
+            <p class="date">Jan. 5</p>
+            <p class="announcement">All FAQ about this course, such as midterm information or assignment questions can be posted and will be answered through Piazza, under the 'Resources' tab.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

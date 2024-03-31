@@ -1,13 +1,17 @@
+<!-- This extension is done using jinja -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='calender.css') }}">
-    <title>Calendar</title>
+    <title>{% block title %}CSCB20 website{% endblock %}</title>    
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    {% block additional_css %}{% endblock %}
 </head>
 <body>
-    <!--navbar-->
+    <!-- template inheritance -->
+    <!-- parent template -->
+    <!-- navbar -->
     <div class="navbar">
         <img src="{{ url_for('static', filename='logo.png') }}">
         <a href="{{ url_for('index') }}">Home</a>
@@ -18,17 +22,10 @@
         <a href="{{ url_for('resources') }}">Resources</a>
         <a href="{{ url_for('feedback') }}">Feedback</a>
     </div>
-    
-    <!-- Content of the page -->
     <article>
-        <div class="content">
-            <h1 id="title">Calender</h1>
-            <div class="iframe-container">
-                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&bgcolor=%234285F4&mode=WEEK&title=Office%20Hours%20%2F%20Important%20Dates&src=b2xpdml2aTY5MUBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px aliceblue" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
     </article>
-    
     <!-- Footer -->
     <div class="footer">
         <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>

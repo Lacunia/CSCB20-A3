@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CourseTeam.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CourseTeam.css') }}">
     <title>Course Team</title>
 </head>
 <body>
     <!--navbar-->
     <div class="navbar">
-        <img src="resources/logo.png">
-        <a href="index.html">Home</a>
-        <a href="CourseTeam.html">CourseTeam</a>
-        <a href="calendar.html">Calender</a>
-        <a href="lecture.html">Lecture/Lab</a>
-        <a href="assignment.html">Assignment</a>
-        <a href="resources.html">Resources</a>
-        <a href="feedback.html">Feedback</a>
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
+        <a href="{{ url_for('calender') }}">Calender</a>
+        <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
+        <a href="{{ url_for('assignment') }}">Assignment</a>
+        <a href="{{ url_for('resources') }}">Resources</a>
+        <a href="{{ url_for('feedback') }}">Feedback</a>
     </div>
     <!-- Content of the page -->
     <article>
