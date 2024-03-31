@@ -1,165 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="lecture.css">
-    <title>Lecture</title>
-</head>
-<body>
-    <!--navbar-->
-    <div class="navbar">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
-        <a href="{{ url_for('calender') }}">Calender</a>
-        <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
-        <a href="{{ url_for('assignment') }}">Assignment</a>
-        <a href="{{ url_for('resources') }}">Resources</a>
-        <a href="{{ url_for('feedback') }}">Feedback</a>
+{% extends "base.html" %}
+
+{% block title %}Lecture{% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lecture.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 id="title">Lecture</h1>
+    <a href="{{ url_for('lab') }}"><h3>Tutorial Labs</h3></a>
+</div>
+<div class="table">
+    <!-- <div class="table-header"><h2></h2></div> -->
+    <div class="table-header"><h2>Week</h2></div>
+    <div class="table-header2"><h2>Topic</h2></div>
+    <div class="table-header3"><h2>Readings</h2></div>
+    <div class="table-header4"><h2>Lecture</h2></div>
+    <div class="week">0</div>
+    <div class="topic">
+        <p>Introduction - Databases, Relational Model</p>
     </div>
-    <!-- Content of the page -->
-    <article>
-        <div class="content">
-            <h1 id="title">Lecture</h1>
-            <a href="lab.html"><h3>Tutorial Labs</h3></a>
-        </div>
-        <div class="table">
-            <!-- <div class="table-header"><h2></h2></div> -->
-            <div class="table-header"><h2>Week</h2></div>
-            <div class="table-header2"><h2>Topic</h2></div>
-            <div class="table-header3"><h2>Readings</h2></div>
-            <div class="table-header4"><h2>Lecture</h2></div>
-            <div class="week">0</div>
-            <div class="topic">
-                <p>Introduction - Databases, Relational Model</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">1</div>
-            <div class="topic">
-                <p>Relational Model, Relational Algebra</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">2</div>
-            <div class="topic">
-                <p>Relational Algebra Queries and SQL Query Language</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">3</div>
-            <div class="topic">
-                <p>SQL Query Language</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">4</div>
-            <div class="topic">
-                <p>SQL and Introduction to web development</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">5</div>
-            <div class="topic">
-                <p>Introduction to HTML and CSS</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div id="midterm">
-                <p><strong>Mid-term Exam</strong></p>
-            </div>
-            <div class="week">6</div>
-            <div class="topic">
-                <p>HTML, CSS, Box Model</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">7</div>
-            <div class="topic">
-                <p>Introduction to Flask, Flexbox, Media Queries</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">8</div>
-            <div class="topic">
-                <p>Flask and Introduction to JavaScript</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">9</div>
-            <div class="topic">
-                <p>Integrating Flask and SQL</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">10</div>
-            <div class="topic">
-                <p>Flask and SQL, examples</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-            <div class="week">11</div>
-            <div class="topic">
-                <p>Wrap-Up</p>
-            </div>
-            <div class="description1">
-                <p><a href="resources/pdf.pdf" target="_blank">Some Reading</a></p>
-            </div>
-            <div class="description2">
-                <p><a href="resources/pdf.pdf" target="_blank">Lecture Material</a></p>
-            </div>
-        </div>
-    </article>
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>
-            <a href="https://web.cs.toronto.edu/">Faculty of Computer Science at University of Toronto</a>
-        </p>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
     </div>
-</body>
-</html>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">1</div>
+    <div class="topic">
+        <p>Relational Model, Relational Algebra</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">2</div>
+    <div class="topic">
+        <p>Relational Algebra Queries and SQL Query Language</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">3</div>
+    <div class="topic">
+        <p>SQL Query Language</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">4</div>
+    <div class="topic">
+        <p>SQL and Introduction to web development</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">5</div>
+    <div class="topic">
+        <p>Introduction to HTML and CSS</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div id="midterm">
+        <p><strong>Mid-term Exam</strong></p>
+    </div>
+    <div class="week">6</div>
+    <div class="topic">
+        <p>HTML, CSS, Box Model</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">7</div>
+    <div class="topic">
+        <p>Introduction to Flask, Flexbox, Media Queries</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">8</div>
+    <div class="topic">
+        <p>Flask and Introduction to JavaScript</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">9</div>
+    <div class="topic">
+        <p>Integrating Flask and SQL</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">10</div>
+    <div class="topic">
+        <p>Flask and SQL, examples</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+    <div class="week">11</div>
+    <div class="topic">
+        <p>Wrap-Up</p>
+    </div>
+    <div class="description1">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Some Reading</a></p>
+    </div>
+    <div class="description2">
+        <p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Lecture Material</a></p>
+    </div>
+</div>
+{% endblock %}
