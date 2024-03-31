@@ -15,11 +15,15 @@
     <div class="navbar">
         <img src="{{ url_for('static', filename='img/logo.png') }}">
         <a href="{{ url_for('index') }}">Home</a>
+        {% if login_status %}
         <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
         <a href="{{ url_for('calendar') }}">Calendar</a>
         <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
         <a href="{{ url_for('assignment') }}">Assignment</a>
         <a href="{{ url_for('resources') }}">Resources</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
         <a href="{{ url_for('feedback') }}">Feedback</a>
     </div>
     <article>

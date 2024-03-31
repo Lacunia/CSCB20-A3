@@ -93,7 +93,7 @@ def register():
 def login():
     if request.method=='GET':
         if 'name' in session:
-            flash('Your are already logged in!')
+            flash('You are already logged in!')
             return redirect(url_for('index'))
         else:
             return render_template('login.html')
@@ -103,7 +103,7 @@ def login():
         person = Person.query.filter_by(utorid = utorid).first()
         if not person or not bcrypt.check_password(person.password, password):
             flash('Please check your login details and try again', 'error')
-            return render_template('login.html')
+            return render_template('login.html', login_status=False)
         else:
             # log_details=(
             #     utorid,
@@ -111,8 +111,9 @@ def login():
             # )
             session['user_id'] = person.utorid
             session.permanent=True
+            login_status=True
             flash('Logged in Successfully!')
-            return redirect(url_for('index'))
+            return redirect(url_for('index'), login_status=True)
 
 @app.route('/calendar')
 def calendar():
