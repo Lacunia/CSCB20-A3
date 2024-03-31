@@ -114,9 +114,9 @@ def login():
             flash('Logged in Successfully!')
             return redirect(url_for('index'))
 
-@app.route('/calender')
-def calender():
-    return render_template('calender.html')
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
 
 @app.route('/CourseTeam')
 def CourseTeam():

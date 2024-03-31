@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block additional_css %}
+    <!-- Link to child-specific CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='calendar.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 id="title">Calendar</h1>
+    <div class="iframe-container">
+        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&bgcolor=%234285F4&mode=WEEK&title=Office%20Hours%20%2F%20Important%20Dates&src=b2xpdml2aTY5MUBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px aliceblue" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
+</div>
+{% endblock %}

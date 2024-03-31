@@ -1,84 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+{% block title %}Course Team{% endblock %}
+
+{% block additional_css %}
+    <!-- Link to child-specific CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='CourseTeam.css') }}">
-    <title>Course Team</title>
-</head>
-<body>
-    <!--navbar-->
-    <div class="navbar">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
-        <a href="{{ url_for('calender') }}">Calender</a>
-        <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
-        <a href="{{ url_for('assignment') }}">Assignment</a>
-        <a href="{{ url_for('resources') }}">Resources</a>
-        <a href="{{ url_for('feedback') }}">Feedback</a>
-    </div>
-    <!-- Content of the page -->
-    <article>
-        <div class="Content">
-            <h1 id="title">Course Team</h1>
-            <div class="instructors">
-                <div class="instructor-info">
-                    <h3>Instructor: Purva Gawde</h3>
-                    <p>
-                        <b>Lecture time:</b> Monday 9am to 11am <br>
-                        <b>Lecture location:</b> SW319 <br>
-                        <b>Office Hour:</b> Tuesday 12am to 1pm
-                    </p>
-                </div>
-                <div class="instructor-info">
-                    <h3>TA: Joshua Concon</h3>
-                    <p>
-                        <b>Tutorial number:</b> TUT0003 <br>
-                        <b>Tutorial time:</b> Wednesday 14:00 to 15:00 <br>
-                        <b>Office Hour:</b> Wednesday 15:00-16:00 
-                    </p>
-                </div>
-                <div class="instructor-info">
-                    <h3>TA: Pourya Moghadam</h3>
-                    <p>
-                        <b>Tutorial number:</b> TUT0001 <br>
-                        <b>Tutorial time:</b> Monday 12:00 to 13:00 <br>
-                        <b>Office Hour:</b> Monday 11:00 to 12:00 or 13:00 to 14:00
-                    </p>
-                </div>
-                <div class="instructor-info">
-                    <h3>TA: Danny Chen</h3>
-                    <p>
-                        <b>Tutorial number:</b> TUT0006 <br>
-                        <b>Tutorial time:</b> Friday 13:00 to 14:00 <br>
-                        <b>Office Hour:</b> Friday 12:00 to 13:00
-                    </p>
-                </div>
-                <div class="instructor-info">
-                    <h3>TA: Nisha Rajendran</h3>
-                    <p>
-                        <b>Tutorial number:</b> TUT0002 <br>
-                        <b>Tutorial time:</b> Wednesday 11:00 to 12:00 <br>
-                        <b>Office Hour:</b> Wednesday 10:00 to 11:00 
-                    </p>
-                </div>
-                <div class="instructor-info">
-                    <h3>TA: Navinn Ravindaran</h3>
-                    <p>
-                        <b>Tutorial number:</b> TUT0002 <br>
-                        <b>Tutorial time:</b> Friday 10:00 to 11:00 <br>
-                        <b>Office Hour:</b> Friday 11:00 to 12:00
-                    </p>
-                </div>
-            </div>
+{% endblock %}
+
+{% block content %}
+<div class="Content">
+    <h1 id="title">Course Team</h1>
+    <div class="instructors">
+        <div class="instructor-info">
+            <h3>Instructor: Purva Gawde</h3>
+            <p>
+                <b>Lecture time:</b> Monday 9am to 11am <br>
+                <b>Lecture location:</b> SW319 <br>
+                <b>Office Hour:</b> Tuesday 12am to 1pm
+            </p>
         </div>
-    </article>
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>
-            <a href="https://web.cs.toronto.edu/">Faculty of Computer Science at University of Toronto</a>
-        </p>
+        <div class="instructor-info">
+            <h3>TA: Joshua Concon</h3>
+            <p>
+                <b>Tutorial number:</b> TUT0003 <br>
+                <b>Tutorial time:</b> Wednesday 14:00 to 15:00 <br>
+                <b>Office Hour:</b> Wednesday 15:00-16:00 
+            </p>
+        </div>
+        <div class="instructor-info">
+            <h3>TA: Pourya Moghadam</h3>
+            <p>
+                <b>Tutorial number:</b> TUT0001 <br>
+                <b>Tutorial time:</b> Monday 12:00 to 13:00 <br>
+                <b>Office Hour:</b> Monday 11:00 to 12:00 or 13:00 to 14:00
+            </p>
+        </div>
+        <div class="instructor-info">
+            <h3>TA: Danny Chen</h3>
+            <p>
+                <b>Tutorial number:</b> TUT0006 <br>
+                <b>Tutorial time:</b> Friday 13:00 to 14:00 <br>
+                <b>Office Hour:</b> Friday 12:00 to 13:00
+            </p>
+        </div>
+        <div class="instructor-info">
+            <h3>TA: Nisha Rajendran</h3>
+            <p>
+                <b>Tutorial number:</b> TUT0002 <br>
+                <b>Tutorial time:</b> Wednesday 11:00 to 12:00 <br>
+                <b>Office Hour:</b> Wednesday 10:00 to 11:00 
+            </p>
+        </div>
+        <div class="instructor-info">
+            <h3>TA: Navinn Ravindaran</h3>
+            <p>
+                <b>Tutorial number:</b> TUT0002 <br>
+                <b>Tutorial time:</b> Friday 10:00 to 11:00 <br>
+                <b>Office Hour:</b> Friday 11:00 to 12:00
+            </p>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
