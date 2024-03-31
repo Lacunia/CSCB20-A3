@@ -114,6 +114,11 @@ def login():
             flash('Logged in Successfully!')
             return redirect(url_for('index'), login_status=True)
 
+# unsure if the logout function is correct
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    return redirect(url_for('index'), login_status=True)
+
 @app.route('/calendar')
 def calendar():
     return render_template('calendar.html')
