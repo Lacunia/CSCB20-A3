@@ -1,48 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-    <title>Login</title>
-</head>
-<body>
-    <!-- navbar -->
-    <div class="navbar">
-        <img src="resources/logo.png">
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+{% block content %}
+<div class="Content">
+    <h1 id="title">Login</h1>
+    <div class="feedback-form">
+        <form action="http://127.0.0.1:5000/login" method="post">
+            <label for="teaching">1. What do you like about the instructor teaching?</label> <br>
+            <textarea id="teaching" name="teaching"></textarea>
+            <br>
+            
+            <label for="teaching-improve">2. What do you recommend the instructor to do to improve their teaching?</label> <br>
+            <textarea id="teaching-improve" name="teaching-improve"></textarea>
+            <br>
+
+            <label for="lab">3. What do you like about the labs?</label> <br>
+            <textarea id="lab" name="lab"></textarea>
+            <br>
+
+            <label for="lab-improve">4. What do you recommend the lab instructors to do to improve their lab teaching?</label> <br>
+            <textarea id="lab-improve" name="lab-improve"></textarea>
+            <br>
+
+            <button type="submit" id="submit">Login</button>
+        </form>
     </div>
-    <!-- page content -->
-    <article>
-        <div class="Content">
-            <h1 id="title">Login</h1>
-            <div class="feedback-form">
-                <form action="http://127.0.0.1:5000/login" method="post">
-                    <label for="teaching">1. What do you like about the instructor teaching?</label> <br>
-                    <textarea id="teaching" name="teaching"></textarea>
-                    <br>
-                    
-                    <label for="teaching-improve">2. What do you recommend the instructor to do to improve their teaching?</label> <br>
-                    <textarea id="teaching-improve" name="teaching-improve"></textarea>
-                    <br>
-
-                    <label for="lab">3. What do you like about the labs?</label> <br>
-                    <textarea id="lab" name="lab"></textarea>
-                    <br>
-
-                    <label for="lab-improve">4. What do you recommend the lab instructors to do to improve their lab teaching?</label> <br>
-                    <textarea id="lab-improve" name="lab-improve"></textarea>
-                    <br>
-
-                    <button type="submit" id="submit">Login</button>
-                </form>
-            </div>
-        </div>
-    </article>
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>
-            <a href="https://web.cs.toronto.edu/">Faculty of Computer Science at University of Toronto</a>
-        </p>
-    </div>
-</body>
-</html>
+</div>
+{% endblock %}

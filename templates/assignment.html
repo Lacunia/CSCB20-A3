@@ -18,24 +18,24 @@
     <div class="solution" id="head"><h2>Solutions</h2></div>
 
     <div class="num"><p>1</p></div>
-    <div class="exercise"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
+    <div class="exercise"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
     <div class="topic"><p>Relational Algebra and MySQL</p></div>
     <div class="weight"><p>8%</p></div>
     <div class="due"><p>February 14, 2024 @11:59pm</p></div>
-    <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">A1 Solution</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">A1 Solution</a></p></div>
 
     <div class="num"><p>2</p></div>
-    <div class="exercise"><p><a href="resources/pdf.pdf" target="_blank">Handout</a><a href="resources/pdf.pdf" target="_blank"> a2.zip</a></p></div>
+    <div class="exercise"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank"> a2.zip</a></p></div>
     <div class="topic"><p>HTML, CSS, Python Flask</p></div>
     <div class="weight"><p>10%</p></div>
     <div class="due"><p>March 15, 2024 @11:59pm</p></div>
-    <div class="solution"><p><a href="resources/pdf.pdf" target="_blank"><br></a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank"><br></a></p></div>
 
     <div class="num"><p>3</p></div>
-    <div class="exercise"><p><a href="resources/pdf.pdf" target="_blank">A3 Handout</a></p></div>
+    <div class="exercise"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">A3 Handout</a></p></div>
     <div class="topic"><p>Web Application and Database</p></div>
     <div class="weight"><p>15%</p></div>
     <div class="due"><p>TBA</p></div>
-    <div class="solution"><p><a href="resources/pdf.pdf" target="_blank"><br></a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank"><br></a></p></div>
 </div>
 {% endblock %}

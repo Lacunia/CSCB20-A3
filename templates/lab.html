@@ -1,87 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial Labs</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='lab.css') }}">
-</head>
-<body>
-    <!--navbar-->
-    <div class="navbar">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('CourseTeam') }}">CourseTeam</a>
-        <a href="{{ url_for('calendar') }}">calendar</a>
-        <a href="{{ url_for('lecture') }}">Lecture/Lab</a>
-        <a href="{{ url_for('assignment') }}">Assignment</a>
-        <a href="{{ url_for('resources') }}">Resources</a>
-        <a href="{{ url_for('feedback') }}">Feedback</a>
-    </div>
-    <!-- Content of the page -->
-    <article>
-        <div class="content">
-            <h1 id="title">Tutorial Labs</h1>
-            <a href="lecture.html"><h3>Lecture</h3></a>
-        </div>
-        <div class="row">
-            <div class="week" id="head"><h2>Week</h2></div>
-            <div class="topic" id="head"><h2>Topic</h2></div>
-            <div class="lab" id="head"><h2>Lab</h2></div>
-            <div class="solution" id="head"><h2>Solutions</h2></div>
+{% extends "base.html" %}
 
-            <div class="week"><p>2</p></div>
-            <div class="topic"><p>Python Review</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+{% block title %}Tutorial Labs{% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab.css') }}">
+{% endblock %}
+{% block content %}
+<div class="content">
+    <h1 id="title">Tutorial Labs</h1>
+    <a href="lecture.html"><h3>Lecture</h3></a>
+</div>
+<div class="row">
+    <div class="week" id="head"><h2>Week</h2></div>
+    <div class="topic" id="head"><h2>Topic</h2></div>
+    <div class="lab" id="head"><h2>Lab</h2></div>
+    <div class="solution" id="head"><h2>Solutions</h2></div>
 
-            <div class="week"><p>3</p></div>
-            <div class="topic"><p>Relational Algebra and SQL</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div class="week"><p>2</p></div>
+    <div class="topic"><p>Python Review</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div class="week"><p>4</p></div>
-            <div class="topic"><p>SQL Query Language</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div class="week"><p>3</p></div>
+    <div class="topic"><p>Relational Algebra and SQL</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div class="week"><p>5</p></div>
-            <div class="topic"><p>SQL View and GROUP BY (and a little HTML)</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div class="week"><p>4</p></div>
+    <div class="topic"><p>SQL Query Language</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div class="week"><p>6</p></div>
-            <div class="topic"><p>Python Flask</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div class="week"><p>5</p></div>
+    <div class="topic"><p>SQL View and GROUP BY (and a little HTML)</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div id="reading"><p><b>Reading Week</b></p></div>
+    <div class="week"><p>6</p></div>
+    <div class="topic"><p>Python Flask</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div class="week"><p>8</p></div>
-            <div class="topic"><p>Introduction to CSS</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div id="reading"><p><b>Reading Week</b></p></div>
 
-            <div class="week"><p>9</p></div>
-            <div class="topic"><p>CSS Flexbox</p></div>
-            <div class="lab"><p><a href="resources/pdf.pdf" target="_blank">Handout</a></p></div>
-            <div class="solution"><p><a href="resources/pdf.pdf" target="_blank">Solution Handout</a></p></div>
+    <div class="week"><p>8</p></div>
+    <div class="topic"><p>Introduction to CSS</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
 
-            <div class="week"><p>10</p></div>
-            <div class="topic"><p>To be uploaded</p></div>
-            <div class="lab"><p><br></p></div>
-            <div class="solution"><p><br></p></div>
-        </div>
-        <div>
-            <h2 id="title">Tutorial Information</h2>
-            <p id="disclaimer">Please go to the tutorial section you have signed up for. However, you are allowed to attend other tutorial sections after informing the TA responsible for the section you are attending. <br>Tutorials are held every week. The first tutorial week is week 2. Please make use of this valuable resource!</p>
-        </div>
-    </article>
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2024 CSCB20. All Rights Reserved. Site designed by Lucy Lin and Snow Shi. <br>
-            <a href="https://web.cs.toronto.edu/">Faculty of Computer Science at University of Toronto</a>
-        </p>
-    </div>
-</body>
-</html>
+    <div class="week"><p>9</p></div>
+    <div class="topic"><p>CSS Flexbox</p></div>
+    <div class="lab"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Handout</a></p></div>
+    <div class="solution"><p><a href="{{ url_for('static', filename='pdf.pdf') }}" target="_blank">Solution Handout</a></p></div>
+
+    <div class="week"><p>10</p></div>
+    <div class="topic"><p>To be uploaded</p></div>
+    <div class="lab"><p><br></p></div>
+    <div class="solution"><p><br></p></div>
+</div>
+<div>
+    <h2 id="title">Tutorial Information</h2>
+    <p id="disclaimer">Please go to the tutorial section you have signed up for. However, you are allowed to attend other tutorial sections after informing the TA responsible for the section you are attending. <br>Tutorials are held every week. The first tutorial week is week 2. Please make use of this valuable resource!</p>
+</div>
+{% endblock %}
