@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+{% block content %}
+<div class="Content">
+    <h1 id="title">Register</h1>
+    <div class="feedback-form">
+        <form action="/login" method="post">
+            <label for="name">Name: </label> <br>
+            <input type="text" id="name" name="name" placeholder="i.e. John Doe" required>
+            <br>
+            <label for="utorid">Utorid: </label> <br>
+            <input type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+            <br>
+            <label for="email">Email: </label> <br>
+            <input type="email" id="email" name="email" placeholder="i.e. johndoe123@mail.utoronto.ca" required>
+            <br>
+            <label for="password">Password: </label> <br>
+            <input type="text" id="password" name="password" required>
+            <br>
+            <!-- <label for="confirm_password">Confirm Password: </label> <br>
+            <input type="text" id="confirm_password" name="confirm_password" required>
+            <br> -->
+            <label for="role">Role: </label> <br>
+            <select id="role" name="role" required>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+            </select>
+            <button type="submit" id="submit">Confirm</button>
+        </form>
+    </div>
+
+    <div>
+        <!-- already have account -->
+        <h3>Already have an account?</h3>
+        <a class="login-btn" href="{{ url_for('login') }}"><h3>Login Here</h3></a>
+    </div>
+</div>
+{% endblock %}

@@ -111,7 +111,6 @@ def login():
             # )
             session['user_id'] = person.utorid
             session.permanent=True
-            login_status=True
             flash('Logged in Successfully!')
             return redirect(url_for('index'), login_status=True)
 
