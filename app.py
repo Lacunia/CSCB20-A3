@@ -18,7 +18,7 @@ class Person(db.Model): # create a table using sqlalchemy
     name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
-    role = db.Column(db.String(1), nullable=False)
+    role = db.Column(db.String(7), nullable=False)
     grades = db.relationship('Grades', backref='person', lazy=True, uselist=False) # ensures one-to-one relationship
 
     def __init__(self, utorid, name, email, password, role, **kwargs):
@@ -92,7 +92,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='GET':
-        if 'name' in session:
+        if 'user_id' in session:
             flash('You are already logged in!')
             return redirect(url_for('index'))
         else:
@@ -110,11 +110,11 @@ def login():
             #     password
             # )
             session['user_id'] = person.utorid
-            session.permanent=True
+            session.permanent=True  # closing the browser will not log out
             flash('Logged in Successfully!')
-            return redirect(url_for('index'), login_status=True)
+            return redirect(url_for('index'), login_status=True, role=person.role, name=person.name)
 
-@app.route('/calendar')
+@app.route('/calendar')  # remember to add flash message for when the user is not logged in
 def calendar():
     return render_template('calendar.html')
 
