@@ -6,25 +6,25 @@
 {% block content %}
 <div class="Content">
     <h1 id="title">Login</h1>
-    <div class="feedback-form">
+    {% with messages = get_flahsed_messages(with_categories = true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}"><strong>Error: </strong>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="login-form">
         <form action="http://127.0.0.1:5000/login" method="post">
-            <label for="teaching">1. What do you like about the instructor teaching?</label> <br>
-            <textarea id="teaching" name="teaching"></textarea>
+            <label for="utorid">Utorid</label> <br>
+            <input type="text" id="utorid" name="Utorid" placeholder="i.e. johndoe1" required>
             <br>
             
-            <label for="teaching-improve">2. What do you recommend the instructor to do to improve their teaching?</label> <br>
-            <textarea id="teaching-improve" name="teaching-improve"></textarea>
+            <label for="password">Password</label> <br>
+            <input type="text" id="password" name="Password" required>
             <br>
 
-            <label for="lab">3. What do you like about the labs?</label> <br>
-            <textarea id="lab" name="lab"></textarea>
-            <br>
-
-            <label for="lab-improve">4. What do you recommend the lab instructors to do to improve their lab teaching?</label> <br>
-            <textarea id="lab-improve" name="lab-improve"></textarea>
-            <br>
-
-            <button type="submit" id="submit">Login</button>
+            <button type="submit" id="login">Login</button>
         </form>
     </div>
 </div>

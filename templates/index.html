@@ -11,6 +11,10 @@
 <div class="content">
     <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
     <br>
+    {% if session.name %}
+        <h2 id="title">Welcome, {{ session.name }}!</h2>
+    {% else %}
+        <h2 id="title">Please login to access more functionalities</h2>
     <div class="row">
         <div class="description" id="course-content">
             <h2>Course Description</h2>
@@ -44,5 +48,6 @@
             <p class="announcement">All FAQ about this course, such as midterm information or assignment questions can be posted and will be answered through Piazza, under the 'Resources' tab.</p>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
