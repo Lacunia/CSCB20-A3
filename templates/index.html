@@ -4,17 +4,12 @@
 
 {% block additional_css %}
     <!-- Link to child-specific CSS file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
 <div class="content">
     <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
-    <br>
-    {% if session.name %}
-        <h2 id="title">Welcome, {{ session.name }}!</h2>
-    {% else %}
-        <h2 id="title">Please login to access more functionalities</h2>
     <div class="row">
         <div class="description" id="course-content">
             <h2>Course Description</h2>
@@ -39,6 +34,8 @@
             <p class="mini-words"><em>Note:</em> Lectures will not be recorded.</p>
         </div>
     </div>
+    {% if session['role'] == 'student' %} 
+    <!-- attempt to get role -->
     <div class="description" id="announcement">
         <h2 class="table-header">Announcement</h2>
         <div class="table">

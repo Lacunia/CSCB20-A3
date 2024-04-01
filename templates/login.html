@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block additional_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
 {% block content %}
 <div class="Content">
     <h1 id="title">Login</h1>
-    {% with messages = get_flahsed_messages(with_categories = true) %}
+    {% with messages = get_flashed_messages(with_categories = true) %}
     {% if messages %}
         <ul class=flashes>
             {% for category, message in messages %}
@@ -14,18 +14,29 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <div class="login-form">
-        <form action="http://127.0.0.1:5000/login" method="post">
-            <label for="utorid">Utorid</label> <br>
-            <input type="text" id="utorid" name="Utorid" placeholder="i.e. johndoe1" required>
-            <br>
-            
-            <label for="password">Password</label> <br>
-            <input type="text" id="password" name="Password" required>
-            <br>
+    {% endwith %}
+    <div class="row">
+        <div class="feedback-form login-card max-400">
+            <form action="/login" method="post">
+                <div>
+                    <label for="utorid">Utorid:</label>
+                    <input class="login-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input class="login-input" type="password" id="password" name="password" required>
+                </div>
+                <button class="login-button" type="submit" id="submit">Login</button>
+            </form>
+        </div>
 
-            <button type="submit" id="login">Login</button>
-        </form>
+        <div class="login-card">
+            <div class="login-text">
+                <!-- already have account -->
+                <h3>Don't have an account yet?</h3>
+                <a class="login-btn" href="{{ url_for('register') }}"><h3>Register Here</h3></a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

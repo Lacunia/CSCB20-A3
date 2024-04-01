@@ -98,11 +98,11 @@ def login():
         else:
             return render_template('login.html')
     else:
-        utorid=request.form['Utorid']
-        password=request.form['Password']
+        utorid=request.form['utorid']
+        password=request.form['password']
         person = Person.query.filter_by(utorid = utorid).first()
         if not person or not bcrypt.check_password(person.password, password):
-            flash('Please check your login details and try again', 'error')
+            flash('Please check your login details and try again', 'error') #'error' is optional
             return render_template('login.html', login_status=False)
         else:
             # log_details=(
@@ -114,7 +114,13 @@ def login():
             flash('Logged in Successfully!')
             return redirect(url_for('index'), login_status=True, role=person.role, name=person.name)
 
-@app.route('/calendar')  # remember to add flash message for when the user is not logged in
+# unsure if the logout function is correct
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('index'), login_status=False)
+
+@app.route('/calendar')
 def calendar():
     return render_template('calendar.html')
 
