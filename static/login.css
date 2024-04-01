@@ -27,16 +27,6 @@
     font-size: larger;
     margin: 30px;
     width: 50%;
-    
-    input {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
 
     select {
         width: 100%;
@@ -49,7 +39,6 @@
     }
     
     button {
-        width: 100%;
         background-color: #0F1E53;
         color: white;
         padding: 14px 20px;
@@ -65,15 +54,29 @@
     }
 }
 
+.full-width {
+    width: 100%;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+.col-2 {
+    width: 16.66%;
+}
+
+.max-400 {
+    max-width: 400px;
+}
+
 .login-card {
     width: 60%;
-    padding: 10px;
     border-radius: 10px;
     background-color: #ECEDEF;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     margin: 30px;
-    float: right;
+    
 
     a{
         text-decoration: none;
@@ -91,4 +94,28 @@
 
 .login-text {
     align-items: center;
+}
+
+.register-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-input {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 10px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 50%;
 }

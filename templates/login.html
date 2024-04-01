@@ -6,25 +6,17 @@
 {% block content %}
 <div class="Content">
     <h1 id="title">Login</h1>
-    <div class="feedback-form">
+    <div class="feedback-form login-card max-400">
         <form action="/login" method="post">
-            <label for="teaching">1. What do you like about the instructor teaching?</label> <br>
-            <textarea id="teaching" name="teaching"></textarea>
-            <br>
-            
-            <label for="teaching-improve">2. What do you recommend the instructor to do to improve their teaching?</label> <br>
-            <textarea id="teaching-improve" name="teaching-improve"></textarea>
-            <br>
-
-            <label for="lab">3. What do you like about the labs?</label> <br>
-            <textarea id="lab" name="lab"></textarea>
-            <br>
-
-            <label for="lab-improve">4. What do you recommend the lab instructors to do to improve their lab teaching?</label> <br>
-            <textarea id="lab-improve" name="lab-improve"></textarea>
-            <br>
-
-            <button type="submit" id="submit">Login</button>
+            <div>
+                <label for="name">Name:</label>
+                <input class="login-input" type="text" id="name" name="name" placeholder="i.e. John Doe" required>
+            </div>
+            <div>
+                <label for="utorid">Utorid:</label>
+                <input class="login-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+            </div>
+            <button class="login-button" type="submit" id="submit">Login</button>
         </form>
     </div>
 </div>
