@@ -6,6 +6,25 @@
 {% block content %}
 <div class="Content">
     <h1 id="title">Login</h1>
+    {% with messages = get_flashed_messages(with_categories = true) %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}"><strong>Error: </strong>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="login-form">
+        <form action="http://127.0.0.1:5000/login" method="post">
+            <label for="utorid">Utorid</label> <br>
+            <input type="text" id="utorid" name="Utorid" placeholder="i.e. johndoe1" required>
+            <br>
+            
+            <label for="password">Password</label> <br>
+            <input type="text" id="password" name="Password" required>
+            <br>
+
+            <button type="submit" id="login">Login</button>
     <div class="feedback-form login-card max-400">
         <form action="/login" method="post">
             <div>

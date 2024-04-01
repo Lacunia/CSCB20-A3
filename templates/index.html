@@ -11,6 +11,10 @@
 <div class="content">
     <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
     <br>
+    {% if session.name %}
+        <h2 id="title">Welcome, {{ session.name }}!</h2>
+    {% else %}
+        <h2 id="title">Please login to access more functionalities</h2>
     <div class="row">
         <div class="description" id="course-content">
             <h2>Course Description</h2>
