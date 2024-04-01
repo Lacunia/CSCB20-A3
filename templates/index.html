@@ -4,7 +4,7 @@
 
 {% block additional_css %}
     <!-- Link to child-specific CSS file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -35,6 +35,7 @@
             <p class="mini-words"><em>Note:</em> Lectures will not be recorded.</p>
         </div>
     </div>
+    {% if session['role'] == 'student' %}
     <div class="description" id="announcement">
         <h2 class="table-header">Announcement</h2>
         <div class="table">
@@ -44,5 +45,6 @@
             <p class="announcement">All FAQ about this course, such as midterm information or assignment questions can be posted and will be answered through Piazza, under the 'Resources' tab.</p>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

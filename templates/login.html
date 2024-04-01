@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block additional_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% endblock %}
 {% block content %}
 <div class="Content">
@@ -9,12 +9,12 @@
     <div class="feedback-form login-card max-400">
         <form action="/login" method="post">
             <div>
-                <label for="name">Name:</label>
-                <input class="login-input" type="text" id="name" name="name" placeholder="i.e. John Doe" required>
-            </div>
-            <div>
                 <label for="utorid">Utorid:</label>
                 <input class="login-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input class="login-input" type="password" id="password" name="password" required>
             </div>
             <button class="login-button" type="submit" id="submit">Login</button>
         </form>
