@@ -6,11 +6,11 @@
 {% block content %}
 <div class="Content">
     <h1 id="title">Login</h1>
-    {% with messages = get_flashed_messages(with_categories = True) %}
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <ul class=flashes>
-            {% for category, message in messages %}
-                <div><strong>{{ category }}</strong> - {{ message }}</div>
+        <ul class="flashes">
+            {% for message in messages %}
+                <div>{{ message }}</div>
             {% endfor %}
         </ul>
     {% endif %}
@@ -19,8 +19,8 @@
         <div class="feedback-form login-card max-400">
             <form action="/login" method="post">
                 <div>
-                    <label for="name">Name:</label>
-                    <input class="login-input" type="text" id="name" name="name" placeholder="i.e. johndoe123" required>
+                    <label for="utorid">Name:</label>
+                    <input class="login-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
                 </div>
                 <div>
                     <label for="password">Password:</label>

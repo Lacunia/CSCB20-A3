@@ -26,7 +26,7 @@
             {% elif role == 'instructor' %}
                 <a href="{{ url_for('manage') }}">Manage</a>
             {% endif %}
-            <a>Logout</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
             <a href="{{ url_for('login') }}">Login</a>
             <!-- <a href="{{ url_for('register') }}">Register</a> -->

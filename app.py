@@ -103,9 +103,9 @@ def login():
         else:
             return render_template('login.html')
     else:
-        name=request.form['name']
+        utorid=request.form['utorid']
         password=request.form['password']
-        person = Person.query.filter_by(name = name).first()
+        person = Person.query.filter_by(utorid=utorid).first()
         if not person or not bcrypt.check_password_hash(person.password, password):
             flash('Please check your login details and try again', 'error') #'error' is optional
             return render_template('login.html')
@@ -114,7 +114,7 @@ def login():
             #     utorid,
             #     password
             # )
-            session['user'] = name
+            session['user'] = utorid
             session.permanent=True  # closing the browser will not log out
             flash('Logged in Successfully!')
             return redirect(url_for('index'))
@@ -163,7 +163,7 @@ def resources():
     return render_template('resources.html', role=role)
 
 
-@app.route('/feedback')
+@app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     role = role = get_role()
     if request.method == 'GET':
@@ -213,9 +213,7 @@ def grades():
     grades_result = None
 
     if "user" in session:
-        name = session.get("user")
-        user = Person.query.filter_by(name = name).first()
-        utorid = user.utorid
+        utorid = session.get("user")
         grades_result = query_grades(utorid)
     
     role = get_role()
@@ -257,8 +255,8 @@ def get_role():
 
     # # Retrieve user's role
     if 'user' in session:
-        username = session.get('user')
-        user = Person.query.filter_by(name = username).first()
+        utorid = session.get('user')
+        user = Person.query.filter_by(utorid=utorid).first()
         role = user.role
     return role
 
