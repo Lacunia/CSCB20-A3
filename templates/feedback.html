@@ -12,6 +12,15 @@
         Please leave your feedback for us. We appreciate any suggestions and will do our best
         to improve the course!
     </p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
     <div class="feedback-form">
         <form action="http://127.0.0.1:5000/feedback" method="post">
             <label for="teaching">1. What do you like about the instructor teaching?</label> <br>

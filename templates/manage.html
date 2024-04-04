@@ -1,12 +1,47 @@
-<!-- for instructors to change student's grade -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Manage{% endblock %}
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage.css') }}">
+{% endblock %}
+{% block content %}
+<div class="Content">
+    <!-- title of page -->
+    <h1 id="title">Register</h1>
+    <!-- for flash message -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    <div class="manage-form">
+        <form action="/register" method="post">
+            <label for="name">Name: </label>
+            <input class="register-input" type="text" id="name" name="name" placeholder="i.e. John Doe" required>
+            <br>
+            <label for="utorid">Utorid: </label> 
+            <input class="register-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+            <br>
+            <label for="email">Email: </label> 
+            <input class="register-input" type="email" id="email" name="email" placeholder="i.e. johndoe123@mail.utoronto.ca" required>
+            <br>
+            <label for="password">Password: </label> 
+            <input class="register-input" type="password" id="password" name="password" required>
+            <br>
+            <!-- <label for="confirm_password">Confirm Password: </label> <br>
+            <input type="text" id="confirm_password" name="confirm_password" required>
+            <br> -->
+            <label for="role">Role: </label>
+            <select id="role" name="role" required>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+            </select>
+            <button class="full-width" type="submit" id="submit"><strong>Confirm</strong></button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

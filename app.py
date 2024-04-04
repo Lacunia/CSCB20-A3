@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt, check_password_hash
 
@@ -40,6 +41,17 @@ class Grades(db.Model): # create a table using sqlalchemy
 
     def __repr__(self):
         return f"Post('{self.utorid}')"
+    
+class Feedbacks(db.Model): # create a table using sqlalchemy
+    __tablename__ = 'Feedbacks'
+    id = db.Column(db.Integer, primary_key=True)
+    q1 = db.Column(db.Text)
+    q2 =db.Column(db.Text)
+    q3  = db.Column(db.Text)
+    q4 = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Post('{self.id}')"
 
 
 @app.route('/') # the function will be executed if the web route has '/' or '/home' as extensions
@@ -50,6 +62,7 @@ def index():
     role = get_role()
     return render_template('index.html', role=role)  # render_template actually linking to the html
     # we take the pagename and use it in the html
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -80,6 +93,7 @@ def add_users(reg_details):
     db.session.add(user)
     db.session.commit()
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method=='GET':
@@ -105,46 +119,94 @@ def login():
             flash('Logged in Successfully!')
             return redirect(url_for('index'))
 
+
 # unsure if the logout function is correct
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.pop('user', None)
     return redirect(url_for('index'))
 
+
 @app.route('/calendar')
 def calendar():
     role = get_role()
     return render_template('calendar.html', role=role)
+
 
 @app.route('/CourseTeam')
 def CourseTeam():
     role = get_role()
     return render_template('CourseTeam.html', role=role)
 
+
 @app.route('/lecture')
 def lecture():
     role = get_role()
     return render_template('lecture.html', role=role)
+
 
 @app.route('/lab')
 def lab():
     role = get_role()
     return render_template('lab.html', role=role)
 
+
 @app.route('/assignment')
 def assignment():
     role = get_role()
     return render_template('assignment.html', role=role)
+
 
 @app.route('/resources')
 def resources():
     role = get_role()
     return render_template('resources.html', role=role)
 
+
 @app.route('/feedback')
 def feedback():
-    role = get_role()
-    return render_template('feedback.html', role=role)
+    role = role = get_role()
+    if request.method == 'GET':
+        return render_template('feedback.html', role=role)
+    else:
+        id = get_unique_id
+        q1 = request.form['teaching']
+        q2 = request.form['teaching-improve']
+        q3 = request.form['lab']
+        q4 = request.form['lab-improve']
+        feedback_detail = (
+            id,
+            q1,
+            q2,
+            q3,
+            q4
+        )
+        add_feedback(feedback_detail)
+        flash("Feedback successfully submitted")
+        return render_template('feedback.html', role=role)
+    
+def get_unique_id():
+    # Query the table to get the maximum ID currently present
+    max_id = db.session.query(func.max(Feedbacks.id)).scalar()
+
+    # If no records exist, start from ID 1
+    if not max_id:
+        return 1
+
+    # Increment the maximum ID by 1 to get a potential new unique ID
+    potential_id = max_id + 1
+
+    # Check if the potential new ID is already present in the table
+    while Feedbacks.query.filter_by(id=potential_id).first():
+        potential_id += 1
+
+    return potential_id
+
+def add_feedback(details):
+    feedback = Feedbacks(id=details[0], q1=details[1], q2=details[2], q3=details[3], q4=details[4])
+    db.session.add(feedback)
+    db.session.commit()
+
 
 @app.route('/grades')
 def grades():
@@ -163,6 +225,7 @@ def grades():
 def query_grades(utorid):
     query_grade = Grades.query.filter_by(utorid = utorid).first()
     return query_grade 
+
 
 @app.route('/manage', methods = ['GET', 'POST']) # methods allow us to do something with the input
 # helps instructors change/add a student's grade for an assignment 
