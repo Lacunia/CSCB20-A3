@@ -257,7 +257,11 @@ def get_role():
     if 'user' in session:
         utorid = session.get('user')
         user = Person.query.filter_by(utorid=utorid).first()
-        role = user.role
+        if user:
+            role = user.role
+        else:
+            # Clear the session if the user does not exist in the database
+            session.pop('user', None)
     return role
 
 if __name__ == '__main__':

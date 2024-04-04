@@ -8,15 +8,6 @@
     <!-- title of page -->
     <h1 id="title">Register</h1>
     <!-- for flash message -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class="flashes">
-            {% for message in messages %}
-                <div>{{ message }}</div>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
     <div class="row">
         <div class="feedback-form">
             <form action="/register" method="post">
