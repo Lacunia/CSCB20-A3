@@ -1,12 +1,46 @@
-<!-- for students to check their grade and submit regrade request -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Grades{% endblock %}
+
+{% block additional_css %}
+    <!-- Link to child-specific CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/grades.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
+    <table class="note_table">
+        <tr>
+            <th>Assignment</th>
+            <th>Grade</th>
+            <th>Regrade request form</th>
+        </tr>
+        <tr>
+            <td>Assignment 1</td>
+            <td>{{ grades.assignment_1 }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Assignment 2</td>
+            <td>{{ grades.assignment_2 }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Assignment 3</td>
+            <td>{{ grades.assignment_3 }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Midterm</td>
+            <td>{{ grades.midterm }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Final</td>
+            <td>{{ grades.final }}</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

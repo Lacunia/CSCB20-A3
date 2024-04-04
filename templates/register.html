@@ -5,10 +5,21 @@
 {% endblock %}
 {% block content %}
 <div class="Content">
+    <!-- title of page -->
     <h1 id="title">Register</h1>
+    <!-- for flash message -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
     <div class="row">
         <div class="feedback-form">
-            <form action="/login" method="post">
+            <form action="/register" method="post">
                 <label for="name">Name: </label>
                 <input class="register-input" type="text" id="name" name="name" placeholder="i.e. John Doe" required>
                 <br>
