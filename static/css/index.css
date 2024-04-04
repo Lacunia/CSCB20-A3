@@ -14,6 +14,11 @@
     justify-content: center;
 }
 
+.flashes {
+    display: flex;
+    justify-content: center;
+}
+
 #introP{
     display: flex;
     justify-content: center;

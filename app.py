@@ -59,9 +59,12 @@ class Feedbacks(db.Model): # create a table using sqlalchemy
 def index():
     # if 'user_id' not in session:
     #     return redirect(url_for('login'))
-    role = get_role()
-    return render_template('index.html', role=role)  # render_template actually linking to the html
-    # we take the pagename and use it in the html
+    if "user" in session:
+        role = get_role()
+        name = Person.query.filter_by(utorid=session.get('user')).first().name
+        return render_template('index.html', role=role, name=name)  # render_template actually linking to the html
+    else:
+        return render_template('index.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
