@@ -1,0 +1,56 @@
+.content {
+    padding: 70px;
+    overflow:auto;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+}
+
+
+table {
+    border: 1px solid black;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    max-width: 100%;
+    width: 100%; /* Set the width to auto */
+    box-sizing: border-box;
+}
+  
+th, td {
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+th {
+    padding: 0;
+    background: aliceblue;
+}
+
+td {
+    padding: 23px 0;
+}
+
+#top-left-corner {
+    border-top-left-radius: 10px;
+}
+
+#top-right-corner {
+    border-top-right-radius: 10px;
+}
+
+#bottom-left-corner {
+    border-bottom-left-radius: 10px;
+}
+
+#bottom-right-corner {
+    border-bottom-right-radius: 10px;
+}
+
+.bottom-border {
+    border-right: 0;
+}

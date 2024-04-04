@@ -172,7 +172,7 @@ def feedback():
     if request.method == 'GET':
         return render_template('feedback.html', role=role)
     else:
-        id = get_unique_id
+        id = get_unique_id()
         q1 = request.form['teaching']
         q2 = request.form['teaching-improve']
         q3 = request.form['lab']

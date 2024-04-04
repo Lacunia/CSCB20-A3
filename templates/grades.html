@@ -9,37 +9,37 @@
 
 {% block content %}
 <div class="content">
-    <h1 id="title">CSCB20 - Introduction to Databases and Web Applications</h1>
-    <table class="note_table">
+    <h1 id="title">My Grades</h1>
+    <table class="grade_table">
         <tr>
-            <th>Assignment</th>
-            <th>Grade</th>
-            <th>Regrade request form</th>
+            <th id="top-left-corner"><h2>Assignment</h2></th>
+            <th><h2>Grade</h2></th>
+            <th id="top-right-corner" class="bottom-border"><h2>Regrade request form</h2></th>
         </tr>
         <tr>
             <td>Assignment 1</td>
             <td>{{ grades.assignment_1 }}</td>
-            <td></td>
+            <td class="bottom-border"></td>
         </tr>
         <tr>
             <td>Assignment 2</td>
             <td>{{ grades.assignment_2 }}</td>
-            <td></td>
+            <td class="bottom-border"></td>
         </tr>
         <tr>
             <td>Assignment 3</td>
             <td>{{ grades.assignment_3 }}</td>
-            <td></td>
+            <td class="bottom-border"></td>
         </tr>
         <tr>
             <td>Midterm</td>
             <td>{{ grades.midterm }}</td>
-            <td></td>
+            <td class="bottom-border"></td>
         </tr>
         <tr>
-            <td>Final</td>
+            <td id="bottom-left-corner">Final</td>
             <td>{{ grades.final }}</td>
-            <td></td>
+            <td id="bottom-right-corner" class="bottom-border"></td>
         </tr>
     </table>
 </div>
