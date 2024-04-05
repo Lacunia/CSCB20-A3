@@ -54,6 +54,15 @@ class Feedbacks(db.Model): # create a table using sqlalchemy
     def __repr__(self):
         return f"Post('{self.id}')"
 
+class Remark(db.Model): # create a table using sqlalchemy
+    __tablename__ = 'Remark'
+    id = db.Column(db.Integer, primary_key=True)
+    utorid = db.Column(db.String(20), db.ForeignKey('Person.utorid'), nullable=False) 
+    explanation = db.Column(db.Text)
+
+    def __repr__(self):
+        return f"Post('{self.utorid}', '{self.explanation})"
+    
 
 @app.route('/') # the function will be executed if the web route has '/' or '/home' as extensions
 @app.route('/index')
@@ -210,7 +219,92 @@ def feedback():
                 flash("Feedback successfully submitted")
                 return render_template('feedback.html', role=role)
     return "Please login to view this page!"
+
+def add_feedback(details):
+    feedback = Feedbacks(id=details[0], utorid=details[1], q1=details[2], q2=details[3], q3=details[4], q4=details[5])
+    db.session.add(feedback)
+    db.session.commit()
+
+def query_feedbacks(utorid):
+    feedbacks = Feedbacks.query.filter_by(utorid=utorid).all()
+    return feedbacks
+
+
+@app.route('/grades')
+def grades():
+    grades_result = None
+
+    if "user" in session:
+        role = get_role()
+        utorid = session.get("user")
+        grades_result = query_grades(utorid)
+
+        id = get_unique_id()
+        utorid = request.form['utorid']
+        explanation = request.form['explanation']
+        feedback_detail = (
+            id,
+            utorid,
+            explanation,
+        )
+        add_feedback(feedback_detail)
+        flash("Remark request successfully sent!")
+    else:
+        return "Please login to view this page!"
     
+    return render_template('grades.html', grades = grades_result, role=role)
+
+# get a student's grades (so we can display it in a table)
+def query_grades(utorid):
+    query_grade = Grades.query.filter_by(utorid = utorid).first()
+    return query_grade 
+
+
+@app.route('/manage', methods = ['GET', 'POST']) # methods allow us to do something with the input
+# helps instructors change/add a student's grade for an assignment 
+def manage():
+    if "user" in session:
+        role = get_role()
+        if request.method == 'GET':
+            remark_requests = query_remarks()
+            return render_template('manage.html', role=role, remark_requests=remark_requests)
+        else: # render this if the method is POST
+            grade_details = (
+                request.form['Utorid'],
+                request.form['Assignment'],
+                request.form['Grade']
+            )
+            add_grades(grade_details)
+            flash("Student's grade changed successfully!")
+            return render_template('manage.html', role=role)
+    return "Please login to view this page!"
+
+# change a student's grade for a specific assignment (into the db)    
+def add_grades(grade_details):
+    student = Grades.query.filter_by(utorid = grade_details[0])
+    setattr(student, grade_details[1], grade_details[2])
+    db.session.commit()
+
+def query_remarks():
+    query_remark = Remark.query.all()
+    return query_remark
+
+
+# get the role of the user
+def get_role():
+    role = None
+
+    # # Retrieve user's role
+    if 'user' in session:
+        utorid = session.get('user')
+        user = Person.query.filter_by(utorid=utorid).first()
+        if user:
+            role = user.role
+        else:
+            # Clear the session if the user does not exist in the database
+            session.pop('user', None)
+    return role
+
 def get_unique_id():
     # Query the table to get the maximum ID currently present
     max_id = db.session.query(func.max(Feedbacks.id)).scalar()
@@ -228,75 +322,6 @@ def get_unique_id():
 
     return potential_id
 
-def add_feedback(details):
-    feedback = Feedbacks(id=details[0], utorid=details[1], q1=details[2], q2=details[3], q3=details[4], q4=details[5])
-    db.session.add(feedback)
-    db.session.commit()
-
-def query_feedbacks(utorid):
-    feedbacks = Feedbacks.query.filter_by(utorid=utorid).all()
-    return feedbacks
-
-
-@app.route('/grades')
-def grades():
-    grades_result = None
-
-    if "user" in session:
-        utorid = session.get("user")
-        grades_result = query_grades(utorid)
-    else:
-        return "Please login to view this page!"
-    
-    role = get_role()
-    return render_template('grades.html', grades = grades_result, role=role)
-
-# get a student's grades (so we can display it in a table)
-def query_grades(utorid):
-    query_grade = Grades.query.filter_by(utorid = utorid).first()
-    return query_grade 
-
-
-@app.route('/manage', methods = ['GET', 'POST']) # methods allow us to do something with the input
-# helps instructors change/add a student's grade for an assignment 
-def manage():
-    if "user" in session:
-        if request.method == 'GET':
-            role = get_role()
-            return render_template('manage.html', role=role)
-        else: # render this if the method is POST
-            grade_details = (
-                request.form['Utorid'],
-                request.form['Assignment'],
-                request.form['Grade']
-            )
-            add_grades(grade_details)
-            flash("Student's grade changed successfully!")
-            role = get_role()
-            return render_template('manage.html', role=role)
-    return "Please login to view this page!"
-
-# change a student's grade for a specific assignment (into the db)    
-def add_grades(grade_details):
-    student = Grades.query.filter_by(utorid = grade_details[0])
-    setattr(student, grade_details[1], grade_details[2])
-    db.session.commit()
-
-
-# get the role of the user
-def get_role():
-    role = None
-
-    # # Retrieve user's role
-    if 'user' in session:
-        utorid = session.get('user')
-        user = Person.query.filter_by(utorid=utorid).first()
-        if user:
-            role = user.role
-        else:
-            # Clear the session if the user does not exist in the database
-            session.pop('user', None)
-    return role
 
 if __name__ == '__main__':
     app.run(debug=True)
