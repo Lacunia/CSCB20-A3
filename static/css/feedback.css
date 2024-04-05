@@ -1,10 +1,10 @@
 .Content {
     padding-top: 70px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
 }
 
 #title {
@@ -72,13 +72,49 @@ button[type="submit"]:hover {
     background-color:royalblue;
 }
 
-.footer {
-    position:static;
-    bottom:0;
-    width:100%;
-    background-color: aliceblue;
-    border-top:2px solid black;
-    height: 5%;
-    padding: 1%;
+
+/* below are css for the page when role == 'instructor */
+table {
+    border: 1px solid black;
+    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 3%;
+    max-width: 100%;
+    width: 90%; /* Set the width to auto */
+    box-sizing: border-box;
+}
+  
+th, td {
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
     text-align: center;
+    box-sizing: border-box;
+}
+
+th {
+    padding: 0;
+    background: aliceblue;
+    width: 50%;
+}
+
+td {
+    padding: 23px 0;
+}
+
+#top-corner {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#bottom-left-corner {
+    border-bottom-left-radius: 10px;
+}
+
+#bottom-right-corner {
+    border-bottom-right-radius: 10px;
+}
+
+.bottom-border {
+    border-right: 0;
 }

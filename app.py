@@ -168,25 +168,29 @@ def resources():
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-    role = role = get_role()
-    if request.method == 'GET':
-        return render_template('feedback.html', role=role)
+    role = get_role()
+    if role == 'instructor':
+        feedbacks = Feedbacks.query.all()
+        return render_template('feedback.html', role=role, feedbacks=feedbacks)
     else:
-        id = get_unique_id()
-        q1 = request.form['teaching']
-        q2 = request.form['teaching-improve']
-        q3 = request.form['lab']
-        q4 = request.form['lab-improve']
-        feedback_detail = (
-            id,
-            q1,
-            q2,
-            q3,
-            q4
-        )
-        add_feedback(feedback_detail)
-        flash("Feedback successfully submitted")
-        return render_template('feedback.html', role=role)
+        if request.method == 'GET':
+            return render_template('feedback.html', role=role)
+        else:
+            id = get_unique_id()
+            q1 = request.form['teaching']
+            q2 = request.form['teaching-improve']
+            q3 = request.form['lab']
+            q4 = request.form['lab-improve']
+            feedback_detail = (
+                id,
+                q1,
+                q2,
+                q3,
+                q4
+            )
+            add_feedback(feedback_detail)
+            flash("Feedback successfully submitted")
+            return render_template('feedback.html', role=role)
     
 def get_unique_id():
     # Query the table to get the maximum ID currently present
