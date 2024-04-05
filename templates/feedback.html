@@ -57,6 +57,14 @@
         {% endwith %}
         <div class="feedback-form">
             <form action="/feedback" method="post">
+                <label for="utorid">Instructor: </label>
+                <select id="utorid" name="utorid" required>
+                    {% for instructor in instructors %}
+                    <option value="{{ instructor.utorid }}">{{ instructor.name }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
                 <label for="teaching">1. What do you like about the instructor's teaching?</label> <br>
                 <textarea id="teaching" name="teaching"></textarea>
                 <br>

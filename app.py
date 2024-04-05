@@ -21,7 +21,7 @@ class Person(db.Model): # create a table using sqlalchemy
     password = db.Column(db.String(20), nullable=False)
     role = db.Column(db.String(7), nullable=False)
     grades = db.relationship('Grades', backref='person', lazy=True, uselist=False) # ensures one-to-one relationship
-
+    
     def __init__(self, utorid, name, email, password, role, **kwargs):
         super().__init__(utorid=utorid, name=name, email=email, password=password, role=role, **kwargs)
         self.grades = Grades(utorid=utorid)
@@ -45,6 +45,7 @@ class Grades(db.Model): # create a table using sqlalchemy
 class Feedbacks(db.Model): # create a table using sqlalchemy
     __tablename__ = 'Feedbacks'
     id = db.Column(db.Integer, primary_key=True)
+    utorid = db.Column(db.String(20), db.ForeignKey('Person.utorid'), nullable=False)
     q1 = db.Column(db.Text)
     q2 =db.Column(db.Text)
     q3  = db.Column(db.Text)
@@ -132,65 +133,83 @@ def logout():
 
 @app.route('/calendar')
 def calendar():
-    role = get_role()
-    return render_template('calendar.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('calendar.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/CourseTeam')
 def CourseTeam():
-    role = get_role()
-    return render_template('CourseTeam.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('CourseTeam.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/lecture')
 def lecture():
-    role = get_role()
-    return render_template('lecture.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('lecture.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/lab')
 def lab():
-    role = get_role()
-    return render_template('lab.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('lab.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/assignment')
 def assignment():
-    role = get_role()
-    return render_template('assignment.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('assignment.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/resources')
 def resources():
-    role = get_role()
-    return render_template('resources.html', role=role)
+    if "user" in session:
+        role = get_role()
+        return render_template('resources.html', role=role)
+    return "Please login to view this page!"
 
 
 @app.route('/feedback', methods=['GET', 'POST'])
 def feedback():
-    role = get_role()
-    if role == 'instructor':
-        feedbacks = Feedbacks.query.all()
-        return render_template('feedback.html', role=role, feedbacks=feedbacks)
-    else:
-        if request.method == 'GET':
-            return render_template('feedback.html', role=role)
+    if "user" in session:
+        role = get_role()
+        if role == 'instructor':
+            utorid = session.get("user")
+            feedbacks = query_feedbacks(utorid)
+            return render_template('feedback.html', role=role, feedbacks=feedbacks)
         else:
-            id = get_unique_id()
-            q1 = request.form['teaching']
-            q2 = request.form['teaching-improve']
-            q3 = request.form['lab']
-            q4 = request.form['lab-improve']
-            feedback_detail = (
-                id,
-                q1,
-                q2,
-                q3,
-                q4
-            )
-            add_feedback(feedback_detail)
-            flash("Feedback successfully submitted")
-            return render_template('feedback.html', role=role)
+            if request.method == 'GET':
+                instructors = Person.query.filter_by(role='instructor').all()
+                return render_template('feedback.html', role=role, instructors=instructors)
+            else:
+                id = get_unique_id()
+                utorid = request.form['utorid']
+                q1 = request.form['teaching']
+                q2 = request.form['teaching-improve']
+                q3 = request.form['lab']
+                q4 = request.form['lab-improve']
+                feedback_detail = (
+                    id,
+                    utorid,
+                    q1,
+                    q2,
+                    q3,
+                    q4
+                )
+                add_feedback(feedback_detail)
+                flash("Feedback successfully submitted")
+                return render_template('feedback.html', role=role)
+    return "Please login to view this page!"
     
 def get_unique_id():
     # Query the table to get the maximum ID currently present
@@ -210,9 +229,13 @@ def get_unique_id():
     return potential_id
 
 def add_feedback(details):
-    feedback = Feedbacks(id=details[0], q1=details[1], q2=details[2], q3=details[3], q4=details[4])
+    feedback = Feedbacks(id=details[0], utorid=details[1], q1=details[2], q2=details[3], q3=details[4], q4=details[5])
     db.session.add(feedback)
     db.session.commit()
+
+def query_feedbacks(utorid):
+    feedbacks = Feedbacks.query.filter_by(utorid=utorid).all()
+    return feedbacks
 
 
 @app.route('/grades')
@@ -222,6 +245,8 @@ def grades():
     if "user" in session:
         utorid = session.get("user")
         grades_result = query_grades(utorid)
+    else:
+        return "Please login to view this page!"
     
     role = get_role()
     return render_template('grades.html', grades = grades_result, role=role)
@@ -235,19 +260,21 @@ def query_grades(utorid):
 @app.route('/manage', methods = ['GET', 'POST']) # methods allow us to do something with the input
 # helps instructors change/add a student's grade for an assignment 
 def manage():
-    if request.method == 'GET':
-        role = get_role()
-        return render_template('manage.html', role=role)
-    else: # render this if the method is POST
-        grade_details = (
-            request.form['Utorid'],
-            request.form['Assignment'],
-            request.form['Grade']
-        )
-        add_grades(grade_details)
-        flash("Student's grade changed successfully!")
-        role = get_role()
-        return render_template('manage.html', role=role)
+    if "user" in session:
+        if request.method == 'GET':
+            role = get_role()
+            return render_template('manage.html', role=role)
+        else: # render this if the method is POST
+            grade_details = (
+                request.form['Utorid'],
+                request.form['Assignment'],
+                request.form['Grade']
+            )
+            add_grades(grade_details)
+            flash("Student's grade changed successfully!")
+            role = get_role()
+            return render_template('manage.html', role=role)
+    return "Please login to view this page!"
 
 # change a student's grade for a specific assignment (into the db)    
 def add_grades(grade_details):

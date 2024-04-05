@@ -55,6 +55,9 @@ select, textarea{
     box-sizing: border-box;
 }
 
+#utorid {
+    height: 50px;
+}
 
 button[type="submit"] {
     width: 100%;
