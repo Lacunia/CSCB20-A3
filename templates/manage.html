@@ -22,36 +22,13 @@
         <form action="/manage" method="post">
             <label for="student_utorid">Student utorid: </label>
             <input class="register-input" type="text" id="student_utorid" name="student_utorid" placeholder="i.e. johndoe123" required>
-            <label for="student_utorid">Student utorid: </label>
-            <input class="register-input" type="text" id="student_utorid" name="student_utorid" placeholder="i.e. johndoe123" required>
             <br>
-            <!-- <label for="course_code">Course Code: </label> 
-            <input class="register-input" type="text" id="course_code" name="course_code" placeholder="i.e. CSCB20" required>
-            <!-- <label for="course_code">Course Code: </label> 
-            <input class="register-input" type="text" id="course_code" name="course_code" placeholder="i.e. CSCB20" required>
-            <br> -->
             <label for="assignment_code">Assignment: </label> 
             <select id="assignment_code" name="assignment_code" required>
                 {% for assignment in assignments %}
                     <option value="{{ assignment }}">{{ assignment }}</option>
                 {% endfor %}
-                <!-- <option value="student">Student</option>
-                <option value="instructor">Instructor</option> -->
-            <label for="assignment_code">Assignment: </label> 
-            <select id="assignment_code" name="assignment_code" required>
-                {% for assignment in assignments %}
-                    <option value="{{ assignment }}">{{ assignment }}</option>
-                {% endfor %}
-                <!-- <option value="student">Student</option>
-                <option value="instructor">Instructor</option> -->
             </select>
-            <label for="mark_update">Updated Mark: </label> 
-            <input class="register-input" type="number" id="mark_update" name="mark_update" placeholder="i.e. 100" required>
-            <br>
-            <!-- maybe students can view the explanations given for their grades -->
-            <label for="explanation">Brief Explanation: </label> 
-            <textarea class="register-input" id="explanation" name="explanation" placeholder="i.e. Perfect!"></textarea>
-            <br>
             <label for="mark_update">Updated Mark: </label> 
             <input class="register-input" type="number" id="mark_update" name="mark_update" placeholder="i.e. 100" required>
             <br>
