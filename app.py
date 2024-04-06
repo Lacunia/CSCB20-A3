@@ -282,7 +282,7 @@ def manage():
             )
             add_grades(grade_details)
             flash("Student's grade changed successfully!")
-            return render_template('manage.html', role=role)
+            return render_template('manage.html', role=role, remark_requests=remark_requests)
     return "Please login to view this page!"
 
 # change a student's grade for a specific assignment (into the db)    
