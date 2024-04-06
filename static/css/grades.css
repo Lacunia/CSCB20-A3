@@ -102,7 +102,7 @@ select, textarea, input{
 }
 
 #utorid {
-    height: 50px;
+    height: auto;
 }
 
 button[type="submit"] {

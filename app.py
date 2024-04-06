@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db' #this set up the pa
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 10) # keep the session on for 10 min
 db = SQLAlchemy(app) 
 
+assignments = ['assignment_1', 'assignment_2', 'assignment_3', 'midterm', 'final']
 
 class Person(db.Model): # create a table using sqlalchemy
     __tablename__ = 'Person'
@@ -273,23 +274,28 @@ def manage():
         role = get_role()
         if request.method == 'GET':
             remark_requests = query_remarks()
-            return render_template('manage.html', role=role, remark_requests=remark_requests)
+            return render_template('manage.html', role=role, remark_requests=remark_requests, assignments=assignments, grades=Grades.query.all())
         else: # render this if the method is POST
             grade_details = (
-                request.form['Utorid'],
-                request.form['Assignment'],
-                request.form['Grade']
+                request.form['student_utorid'],
+                request.form['assignment_code'],
+                request.form['mark_update']
             )
             add_grades(grade_details)
             flash("Student's grade changed successfully!")
-            return render_template('manage.html', role=role, remark_requests=remark_requests)
+            return render_template('manage.html', role=role, remark_requests=remark_requests, assignments=assignments, grades=Grades.query.all())
     return "Please login to view this page!"
 
 # change a student's grade for a specific assignment (into the db)    
 def add_grades(grade_details):
-    student = Grades.query.filter_by(utorid = grade_details[0])
-    setattr(student, grade_details[1], grade_details[2])
-    db.session.commit()
+    try:
+        student = Grades.query.filter_by(utorid = grade_details[0]).first()
+        if student:
+            setattr(student, grade_details[1], grade_details[2])
+            db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(e)
 
 def query_remarks():
     query_remark = Remark.query.all()
