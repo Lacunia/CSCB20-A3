@@ -18,6 +18,7 @@
     {% endif %}
     {% endwith %}
     <div class="manage-form">
+        <h3>Update Student Grades</h3>
         <form action="/manage" method="post">
             <label for="student_utorid">Student utorid: </label>
             <input class="register-input" type="text" id="student_utorid" name="student_utorid" placeholder="i.e. johndoe123" required>
@@ -44,7 +45,7 @@
         </form>
     </div>
 
-    <h3>View Grades</h3>
+    <h3>Student Grades</h3>
     <table class="grade-table">
         <tr>
             <th id="top-left-corner"><h2>Student</h2></th>
@@ -66,7 +67,7 @@
         {% endfor %}
     </table>
 
-    <h3>View Remark Requests</h3>
+    <h3>Remark Requests</h3>
     <table class="remark-table">
         <tr>
             <th id="top-left-corner"><h2>Student</h2></th>
