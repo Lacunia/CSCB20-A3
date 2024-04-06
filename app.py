@@ -271,9 +271,10 @@ def add_remark(remark_details):
 # helps instructors change/add a student's grade for an assignment 
 def manage():
     if "user" in session:
+        role = get_role()
         if request.method == 'GET':
-            role = get_role()
-            return render_template('manage.html', role=role, assignments=assignments, grades=Grades.query.all())
+            remark_requests = query_remarks()
+            return render_template('manage.html', role=role, remark_requests=remark_requests, assignments=assignments, grades=Grades.query.all())
         else: # render this if the method is POST
             grade_details = (
                 request.form['student_utorid'],
@@ -282,8 +283,7 @@ def manage():
             )
             add_grades(grade_details)
             flash("Student's grade changed successfully!")
-            role = get_role()
-            return render_template('manage.html', role=role, assignments=assignments, grades=Grades.query.all())
+            return render_template('manage.html', role=role, remark_requests=remark_requests, assignments=assignments, grades=Grades.query.all())
     return "Please login to view this page!"
 
 # change a student's grade for a specific assignment (into the db)    
