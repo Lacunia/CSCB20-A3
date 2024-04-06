@@ -20,6 +20,17 @@
     justify-content: center;
 }
 
+.flashes {
+    padding-left: 0;
+    margin-bottom: 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid grey;
+    background-color: #ECEDEF;
+    color: #5C7BAD;
+}
+
 .feedback-form {
     background-color: #ECEDEF;
     padding: 30px 50px 30px 50px;
@@ -119,3 +130,4 @@
 .login-button {
     width: 50%;
 }
+

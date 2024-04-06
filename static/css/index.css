@@ -1,5 +1,6 @@
 .content {
-    padding: 70px;
+    padding: 70px;    
+    max-width: 100%;
 }
 
 .row {
@@ -15,8 +16,14 @@
 }
 
 .flashes {
-    display: flex;
-    justify-content: center;
+    margin-bottom: 0;
+    max-width: 100%;
+    width: 96%;
+    padding: 10px;
+    border: 1px solid grey;
+    background-color: aliceblue;
+    color: #5C7BAD;
+    text-align: center;
 }
 
 #introP{

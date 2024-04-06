@@ -24,7 +24,8 @@ class Person(db.Model): # create a table using sqlalchemy
     
     def __init__(self, utorid, name, email, password, role, **kwargs):
         super().__init__(utorid=utorid, name=name, email=email, password=password, role=role, **kwargs)
-        self.grades = Grades(utorid=utorid)
+        if role == 'student':
+            self.grades = Grades(utorid=utorid)
 
     def __repr__(self): # string representation of the table
         return f"Person('{self.utorid}', '{self.name}', '{self.role})"
@@ -197,11 +198,11 @@ def feedback():
             feedbacks = query_feedbacks(utorid)
             return render_template('feedback.html', role=role, feedbacks=feedbacks)
         else:
+            instructors = Person.query.filter_by(role='instructor').all()
             if request.method == 'GET':
-                instructors = Person.query.filter_by(role='instructor').all()
                 return render_template('feedback.html', role=role, instructors=instructors)
             else:
-                id = get_unique_id()
+                id = get_unique_id(Feedbacks)
                 utorid = request.form['utorid']
                 q1 = request.form['teaching']
                 q2 = request.form['teaching-improve']
@@ -217,7 +218,7 @@ def feedback():
                 )
                 add_feedback(feedback_detail)
                 flash("Feedback successfully submitted")
-                return render_template('feedback.html', role=role)
+                return render_template('feedback.html', role=role, instructors=instructors)
     return "Please login to view this page!"
 
 def add_feedback(details):
@@ -230,34 +231,39 @@ def query_feedbacks(utorid):
     return feedbacks
 
 
-@app.route('/grades')
+@app.route('/grades', methods=['GET', 'POST'])
 def grades():
-    grades_result = None
-
     if "user" in session:
+        grades_result = None
         role = get_role()
+
+        if request.method == 'POST':
+            id = get_unique_id(Remark)
+            utorid = request.form['utorid']
+            explanation = request.form['explanation']
+            remark_detail = (
+                id,
+                utorid,
+                explanation,
+            )
+            add_remark(remark_detail)
+            flash("Remark request successfully sent!")
+
         utorid = session.get("user")
         grades_result = query_grades(utorid)
-
-        id = get_unique_id()
-        utorid = request.form['utorid']
-        explanation = request.form['explanation']
-        feedback_detail = (
-            id,
-            utorid,
-            explanation,
-        )
-        add_feedback(feedback_detail)
-        flash("Remark request successfully sent!")
+        return render_template('grades.html', grades = grades_result, role=role)
     else:
         return "Please login to view this page!"
     
-    return render_template('grades.html', grades = grades_result, role=role)
-
 # get a student's grades (so we can display it in a table)
 def query_grades(utorid):
     query_grade = Grades.query.filter_by(utorid = utorid).first()
     return query_grade 
+
+def add_remark(remark_details):
+    remark = Remark(id=remark_details[0], utorid=remark_details[1], explanation=remark_details[2])
+    db.session.add(remark)
+    db.session.commit()
 
 
 @app.route('/manage', methods = ['GET', 'POST']) # methods allow us to do something with the input
@@ -305,9 +311,9 @@ def get_role():
             session.pop('user', None)
     return role
 
-def get_unique_id():
+def get_unique_id(database):
     # Query the table to get the maximum ID currently present
-    max_id = db.session.query(func.max(Feedbacks.id)).scalar()
+    max_id = db.session.query(func.max(database.id)).scalar()
 
     # If no records exist, start from ID 1
     if not max_id:
@@ -315,10 +321,6 @@ def get_unique_id():
 
     # Increment the maximum ID by 1 to get a potential new unique ID
     potential_id = max_id + 1
-
-    # Check if the potential new ID is already present in the table
-    while Feedbacks.query.filter_by(id=potential_id).first():
-        potential_id += 1
 
     return potential_id
 
