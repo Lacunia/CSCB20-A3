@@ -10,37 +10,55 @@
 {% block content %}
 <div class="content">
     <h1 id="title">My Grades</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
     <table class="grade_table">
         <tr>
             <th id="top-left-corner"><h2>Assignment</h2></th>
-            <th><h2>Grade</h2></th>
-            <th id="top-right-corner" class="bottom-border"><h2>Regrade request form</h2></th>
+            <th id="top-right-corner" class="bottom-border"><h2>Grade</h2></th>
         </tr>
         <tr>
             <td>Assignment 1</td>
-            <td>{{ grades.assignment_1 }}</td>
-            <td class="bottom-border"></td>
+            <td class="bottom-border">{{ grades.assignment_1 }}</td>
         </tr>
         <tr>
             <td>Assignment 2</td>
-            <td>{{ grades.assignment_2 }}</td>
-            <td class="bottom-border"></td>
+            <td class="bottom-border">{{ grades.assignment_2 }}</td>
         </tr>
         <tr>
             <td>Assignment 3</td>
-            <td>{{ grades.assignment_3 }}</td>
-            <td class="bottom-border"></td>
+            <td class="bottom-border">{{ grades.assignment_3 }}</td>
         </tr>
         <tr>
             <td>Midterm</td>
-            <td>{{ grades.midterm }}</td>
-            <td class="bottom-border"></td>
+            <td class="bottom-border">{{ grades.midterm }}</td>
         </tr>
         <tr>
             <td id="bottom-left-corner">Final</td>
-            <td>{{ grades.final }}</td>
-            <td id="bottom-right-corner" class="bottom-border"></td>
+            <td class="bottom-border">{{ grades.final }}</td>
         </tr>
     </table>
+
+    <div class="remark-form">
+        <h1 id="title">Remark Request Form</h1>
+        <form action="/grades" method="post">
+            <label for="utorid">Utorid: </label> <br>
+            <input type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
+            <br>
+
+            <label for="explanation">Please specify the question number you want to request a regrade on and provide a brief explanation as to why.</label> <br>
+            <textarea id="explanation" name="explanation"></textarea>
+            <br>
+
+            <button type="submit" id="submit">Submit</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
