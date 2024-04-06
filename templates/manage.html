@@ -43,45 +43,41 @@
             <button class="full-width" type="submit" id="submit"><strong>Confirm</strong></button>
         </form>
     </div>
-    <div>
-        <h3>View Grades</h3>
-        <table class="grade-table">
-            <tr>
-                <th>Student</th>
-                <th>Assignment 1</th>
-                <th>Assignment 2</th>
-                <th>Assignment 3</th>
-                <th>Midterm</th>
-                <th>Final</th>
-            </tr>
-            {% for grade in grades %}
-            <tr>
-                <td>{{ grade.utorid }}</td>
-                <td>{{ grade.assignment_1 }}</td>
-                <td>{{ grade.assignment_2 }}</td>
-                <td>{{ grade.assignment_3 }}</td>
-                <td>{{ grade.midterm }}</td>
-                <td>{{ grade.final }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
 
-    <div>
-        <h3>View Remark Requests</h3>
-        <table class="grade-table">
-            <tr>
-                <th>Student</th>
-                <th>Explanation</th>
-            </tr>
-            {% for remark_request in remark_requests %}
-            <tr>
-                <td>{{ remark_request.utorid }}</td>
-                <td>{{ remark_request.explanation }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <h3>View Grades</h3>
+    <table class="grade-table">
+        <tr>
+            <th id="top-left-corner"><h2>Student</h2></th>
+            <th><h2>Assignment 1</h2></th>
+            <th><h2>Assignment 2</h2></th>
+            <th><h2>Assignment 3</h2></th>
+            <th><h2>Midterm</h2></th>
+            <th id="top-right-corner" class="bottom-border"><h2>Final</h2></th>
+        </tr>
+        {% for grade in grades %}
+        <tr>
+            <td>{{ grade.utorid }}</td>
+            <td>{{ grade.assignment_1 }}</td>
+            <td>{{ grade.assignment_2 }}</td>
+            <td>{{ grade.assignment_3 }}</td>
+            <td>{{ grade.midterm }}</td>
+            <td class="bottom-border">{{ grade.final }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
+    <h3>View Remark Requests</h3>
+    <table class="grade-table">
+        <tr>
+            <th id="top-left-corner"><h2>Student</h2></th>
+            <th id="top-right-corner" class="bottom-border"><h2>Explanation</h2></th>
+        </tr>
+        {% for remark_request in remark_requests %}
+        <tr>
+            <td>{{ remark_request.utorid }}</td>
+            <td class="bottom-border">{{ remark_request.explanation }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}
