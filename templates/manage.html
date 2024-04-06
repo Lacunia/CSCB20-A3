@@ -67,5 +67,21 @@
         </table>
     </div>
 
+    <div>
+        <h3>View Remark Requests</h3>
+        <table class="grade-table">
+            <tr>
+                <th>Student</th>
+                <th>Explanation</th>
+            </tr>
+            {% for remark_request in remark_requests %}
+            <tr>
+                <td>{{ remark_request.utorid }}</td>
+                <td>{{ remark_request.explanation }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 </div>
 {% endblock %}
