@@ -6,7 +6,7 @@
 {% block content %}
 <div class="Content">
     <!-- title of page -->
-    <h1 id="title">Register</h1>
+    <h1 id="title">Manage</h1>
     <!-- for flash message -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -19,28 +19,52 @@
     {% endwith %}
     <div class="manage-form">
         <form action="/manage" method="post">
-            <label for="name">Name: </label>
-            <input class="register-input" type="text" id="name" name="name" placeholder="i.e. John Doe" required>
+            <label for="student_utorid">Student utorid: </label>
+            <input class="register-input" type="text" id="student_utorid" name="student_utorid" placeholder="i.e. johndoe123" required>
             <br>
-            <label for="utorid">Utorid: </label> 
-            <input class="register-input" type="text" id="utorid" name="utorid" placeholder="i.e. johndoe123" required>
-            <br>
-            <label for="email">Email: </label> 
-            <input class="register-input" type="email" id="email" name="email" placeholder="i.e. johndoe123@mail.utoronto.ca" required>
-            <br>
-            <label for="password">Password: </label> 
-            <input class="register-input" type="password" id="password" name="password" required>
-            <br>
-            <!-- <label for="confirm_password">Confirm Password: </label> <br>
-            <input type="text" id="confirm_password" name="confirm_password" required>
+            <!-- <label for="course_code">Course Code: </label> 
+            <input class="register-input" type="text" id="course_code" name="course_code" placeholder="i.e. CSCB20" required>
             <br> -->
-            <label for="role">Role: </label>
-            <select id="role" name="role" required>
-                <option value="student">Student</option>
-                <option value="instructor">Instructor</option>
+            <label for="assignment_code">Assignment: </label> 
+            <select id="assignment_code" name="assignment_code" required>
+                {% for assignment in assignments %}
+                    <option value="{{ assignment }}">{{ assignment }}</option>
+                {% endfor %}
+                <!-- <option value="student">Student</option>
+                <option value="instructor">Instructor</option> -->
             </select>
+            <label for="mark_update">Updated Mark: </label> 
+            <input class="register-input" type="number" id="mark_update" name="mark_update" placeholder="i.e. 100" required>
+            <br>
+            <!-- maybe students can view the explanations given for their grades -->
+            <label for="explanation">Brief Explanation: </label> 
+            <textarea class="register-input" id="explanation" name="explanation" placeholder="i.e. Perfect!"></textarea>
+            <br>
             <button class="full-width" type="submit" id="submit"><strong>Confirm</strong></button>
         </form>
+    </div>
+    <div>
+        <h3>View Grades</h3>
+        <table class="grade-table">
+            <tr>
+                <th>Student</th>
+                <th>Assignment 1</th>
+                <th>Assignment 2</th>
+                <th>Assignment 3</th>
+                <th>Midterm</th>
+                <th>Final</th>
+            </tr>
+            {% for grade in grades %}
+            <tr>
+                <td>{{ grade.utorid }}</td>
+                <td>{{ grade.assignment_1 }}</td>
+                <td>{{ grade.assignment_2 }}</td>
+                <td>{{ grade.assignment_3 }}</td>
+                <td>{{ grade.midterm }}</td>
+                <td>{{ grade.final }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 
 </div>
